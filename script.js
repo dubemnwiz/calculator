@@ -11,6 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (b == 0) {
+        return 'Error: Divide by Zero';
+    }
     return a / b;
 }
 
@@ -31,46 +34,84 @@ let num2 = 0;
 let op = '';
 
 let calc = document.querySelector('.calculator');
+let output = document.querySelector('.output');
 
 calc.addEventListener('click', (e) => {
     let target = e.target;
 
     switch(target.id) {
         case 'add':
-            console.log('Add');
+            if (op == '') {
+                num1 = +output.textContent;
+                op = '+';
+                output.textContent += '+';
+            }
             break;
         case 'subtract':
-            console.log('subtract');
+            if (op == '') {
+                num1 = +output.textContent;
+                op = '-';
+                output.textContent += '-';
+            }
             break;
         case 'multiply':
-            console.log('multiply');
+            if (op == '') {
+                num1 = +output.textContent;
+                op = '*';
+                output.textContent += '*';
+            }
             break;
         case 'divide':
-            console.log('divide')
+            if (op == '') {
+                num1 = +output.textContent;
+                op = '/';
+                output.textContent += '/';
+            }
             break;
         case 'equal':
-            console.log('equal');
+            let idx = output.textContent.indexOf(op);
+            num2 = +output.textContent.slice(idx + 1);
+            let total = operate(num1, num2, op);
+            output.textContent = total;
+            num1 = total;
+            num2 = 0;
+            op = '';
             break;
         case 'clear':
-            console.log('clear');
+            output.textContent = '';
+            num1 = 0;
+            num2 = 0;
+            op = '';
+            break;
+        case 'zero':
+            output.textContent += '0';
             break;
         case 'one':
+            output.textContent += '1';
             break;
         case 'two':
+            output.textContent += '2';
             break;
         case 'three':
+            output.textContent += '3';
             break;
         case 'four':
+            output.textContent += '4';
             break;
         case 'five':
+            output.textContent += '5';
             break;
         case 'six':
+            output.textContent += '6';
             break;
         case 'seven':
+            output.textContent += '7';
             break;
         case 'eight':
+            output.textContent += '8';
             break;
         case 'nine':
+            output.textContent += '9';
             break;
     }
 });
